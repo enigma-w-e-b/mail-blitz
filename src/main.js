@@ -6,9 +6,8 @@ const emails = readFileSync('./emails.csv', 'utf-8').split('\n');
 
 (async () => {
     emails.forEach(async (email, index) => {
-        console.log(`Enviando email para ${email}`);
         setTimeout(async () => {
-            await sendEmail(email, 'Teste de envio de email', 'Olá, este é um teste de envio de email');
+            await sendEmail(email, process.env.EMAIL_SUBJECT, process.env.EMAIL_BODY);
         }, 20000 * index);
     });
 })()
