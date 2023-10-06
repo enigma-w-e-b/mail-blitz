@@ -1,7 +1,12 @@
 const { createTransport } = require('nodemailer')
 const  { google } = require('googleapis');
 
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async ({
+    to = '',
+    subject = '',
+    text = '',
+    html = ''
+}) => {
 
     const oAuth2 = google.auth.OAuth2;
 
@@ -43,6 +48,7 @@ const sendEmail = async (to, subject, text) => {
         from: process.env.EMAIL,
         to,
         subject,
+        html,
         text
     };
     transporter.sendMail(mailOptions, (error, info) => {
